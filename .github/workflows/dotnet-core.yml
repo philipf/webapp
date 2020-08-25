@@ -31,10 +31,10 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish --no-build --configuration Release --output ./publish/ 
+      run: dotnet publish --no-build --configuration Release --output ./publish 
 
     - name: Upload WebApp1 Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: WebApp1
-        path: ./publish/
+        path: /home/runner/work/webapp/webapp/src/publish/
