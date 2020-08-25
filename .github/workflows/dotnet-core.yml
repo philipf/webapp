@@ -1,4 +1,4 @@
-name: .NET Core
+name: Sample Web App
 
 on:
   push:
@@ -7,12 +7,14 @@ on:
     branches: [ master ]
   workflow_dispatch:
     branches: [ master ]
-  
+
+defaults:
+  run:
+    working-directory: ./src    
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +23,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      working-directory: ./src
       run: dotnet restore
     - name: Build
-      working-directory: ./src
       run: dotnet build --configuration Release --no-restore
+    - name: Publish
+      run: dotnet publish --no-build --configuration Release --output webapp1 -
