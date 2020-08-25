@@ -18,13 +18,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+
     - name: Install dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build --configuration Release --no-restore
+
     - name: Publish
-      run: dotnet publish --no-build --configuration Release --output webapp1 -
+      run: dotnet publish --no-build --configuration Release --output ./publish/ 
+
+    - name: Upload WebApp1 Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: WebApp1
+        path: ./publish/
